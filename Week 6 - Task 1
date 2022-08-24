@@ -1,27 +1,72 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import LoginComponent from "../views/login.vue"
-import SecureComponent from "../views/secure.vue"
-
-Vue.use(VueRouter)
-
-export default new VueRouter({
-    routes: [
-        {
-            path: '/',
-            redirect: {
-                name: "login"
-            }
-        },
-        {
-            path: "/login",
-            name: "login",
-            component: LoginComponent
-        },
-        {
-            path: "/secure",
-            name: "secure",
-            component: SecureComponent
+< script >
+  export default {
+    data: () => ({
+      email: "",
+      password: "",
+    }),
+    methods: {
+      validate() {
+        if (this.email = "test" && this.password = "test") {
+          this.$router.push('/Instructions');
+        } else {
+          this.$router.push('/');
         }
-    ]
-})
+
+
+
+      },
+    },
+  }; <
+/script>
+<template>
+  <v-container>
+    <div style="text-align: center;margin-bottom: 15px;">
+      <img src="../assets/images/LogoGirmiti.png" />
+    </div>
+    <v-form>
+      <v-row>
+        <v-col offset-md="4">
+          <v-text-field
+            v-model="email"
+            type="email"
+            placeholder="E-mail"
+            rounded
+            filled
+            required
+            style="width:400px;"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col offset-md="4">
+          <v-text-field
+            v-model="password"
+            type="password"
+            placeholder="Password"
+            required
+            rounded
+            filled
+            style="width:400px;"
+          ></v-text-field>
+        </v-col>
+       
+      </v-row>
+      <v-row>
+        <v-col style="text-align: center">
+          <v-btn color="success" class="mr-4" @click="validate"> Login </v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
+<input type="checkbox" id="checkbox" v-model="checked">
+<label for="checkbox">{{ checked }}</label>
+
+<select v-model="selected" multiple>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+</select>
+<br>
+<span>Selected: {{ selected }}</span>
+
+  </v-container>
+</template>
