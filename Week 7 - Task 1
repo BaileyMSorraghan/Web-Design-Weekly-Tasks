@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>lab7Components</title>
+</head>
+<body>
+
+    <div id="app">
+        {{message}}
+
+        <div>
+            <componenta></componenta>
+            <div>
+                <component-b></component-b>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        //Declare Component
+        let ComponentB = {
+            data() {
+                return {
+                    componentbmessage: "This is from component B"
+                }
+            },
+            template: "<div>{{componentbmessage}}</div>"
+        }
+
+        //Global Registration
+        Vue.component('componenta',{
+            data(){
+                return {
+                    componentamessage: "Component A Message"
+                }
+            },
+            template: '<div>{{componentamessage}}</div>'
+        })
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    message: "learning Vue Components!"
+                }
+            },
+            components: {
+                'component-b':ComponentB
+            }
+        })
+    </script>
+
+</body>
+</html>
