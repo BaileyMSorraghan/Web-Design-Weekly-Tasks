@@ -1,72 +1,127 @@
-< script >
-  export default {
-    data: () => ({
-      email: "",
-      password: "",
-    }),
-    methods: {
-      validate() {
-        if (this.email = "test" && this.password = "test") {
-          this.$router.push('/Instructions');
-        } else {
-          this.$router.push('/');
-        }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+</head>
+<body>
+    <form>
+        <label for="email">Enter User Information</label>
+        <Vueemail
+            v-model="user.email"
+            :strength="score"
+            @input="updateStrength"
+        />
+    </form>
+    <br>
+    <form>
+        <label for="password"><br></label>
+        <VuePassword
+            v-model="user.password"
+            :strength="score"
+            @input="updateStrength"
+        />
+    </form>
+    <div id="app4">
+        <br>
+        {{message}}
 
-
-
-      },
-    },
-  }; <
-/script>
-<template>
-  <v-container>
-    <div style="text-align: center;margin-bottom: 15px;">
-      <img src="../assets/images/LogoGirmiti.png" />
+        <select name="" id="">
+            <option v-for="item in list" value="item">{{item}}</option>
+        </select>
     </div>
-    <v-form>
-      <v-row>
-        <v-col offset-md="4">
-          <v-text-field
-            v-model="email"
+
+
+<script>
+new Vue({
+    el: '#app2',
+    components: {
+        Vueemail,
+    },
+    data: {
+        score: 0,
+        user: {
+            Vueemail: ''
+        }
+    },
+    methods: {
+        updateStrength(email) {
+        }
+    }
+});
+</script>
+<br>
+<script>
+    new Vue({
+    el: '#app',
+    components: {
+        VuePassword,
+    },
+    data: {
+        score: 0,
+        user: {
+            password: ''
+        }
+    },
+    methods: {
+        updateStrength(password) {
+        }
+    }
+});
+</script>
+
+<script>
+    new Vue({
+        el: "#app4",
+        data() {
+            return{
+                message: "How many days a week do you go to the gym?",
+                list: [1, 2, 3, 4, 5, 6, 7]
+            }
+        },
+    })
+</script>
+
+</script>
+
+
+<Vueemail
+    v-model="user.email"
+>
+    <div
+        v-slot:email-input="props"
+        class="control has-icons-left"
+    >
+        <input
+            class="input"
             type="email"
             placeholder="E-mail"
-            rounded
-            filled
-            required
-            style="width:400px;"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col offset-md="4">
-          <v-text-field
-            v-model="password"
+            :value="props.value"
+            @input="props.updateemail"
+        />
+    </div>
+</Vueemail>
+<VuePassword
+    v-model="user.password"
+>
+    <div
+        v-slot:password-input="props"
+        class="control has-icons-left"
+    >
+        <input
+            class="input"
             type="password"
             placeholder="Password"
-            required
-            rounded
-            filled
-            style="width:400px;"
-          ></v-text-field>
-        </v-col>
-       
-      </v-row>
-      <v-row>
-        <v-col style="text-align: center">
-          <v-btn color="success" class="mr-4" @click="validate"> Login </v-btn>
-        </v-col>
-      </v-row>
-    </v-form>
-<input type="checkbox" id="checkbox" v-model="checked">
-<label for="checkbox">{{ checked }}</label>
-
-<select v-model="selected" multiple>
-  <option>A</option>
-  <option>B</option>
-  <option>C</option>
-</select>
+            :value="props.value"
+            @input="props.updatePassword"
+        />
+    </div>
+</VuePassword>
 <br>
-<span>Selected: {{ selected }}</span>
-
-  </v-container>
-</template>
+<input type="checkbox" id="checkbox" v-model="checked" />
+<label for="checkbox">Tick to Receive Promotonal E-mails</label>
+</body>
+</html>
